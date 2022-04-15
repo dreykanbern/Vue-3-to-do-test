@@ -1,30 +1,40 @@
+<!-- eslint-disable -->
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div class="app">
+    <post-form
+      @create="createPost"
+    />
+    <post-list
+      :posts="posts"
+      @create="createPost"
+    />
+  </div>
 </template>
+<!-- eslint-disable -->
+<style lang='scss' src="./app.scss"></style>
+<!-- eslint-disable -->
+<script>
+import PostForm from "@/components/PostForm/PostForm";
+import PostList from "@/components/PostList/PostList";
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+export default {
+  components: {
+    PostList, PostForm
+  },
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  data() {
+    return {
+      posts: [
+        {id: 1, title: "JavaScript", body: "Описание поста"},
+        {id: 2, title: "JavaScript 2", body: "Описание поста 2"},
+        {id: 3, title: "JavaScript 3", body: "Описание поста 3"},
+      ],
     }
+  },
+  methods: {
+    createPost(post) {
+      this.posts.push(post); 
+    },
   }
-}
-</style>
+};
+</script>
